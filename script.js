@@ -22,8 +22,13 @@ taskInput.addEventListener("keypress", function(e) {
 function addTask() {
     const taskText = taskInput.value.trim();
     if (taskText === "") return;
+    const task = {
+        text: taskText,
+        completed: false,
+        time: new Date().toLocaleTimeString() // ✅ अब सिर्फ़ time रहेगा
+    };
 
-    tasks.push({ text: taskText, completed: false });
+    tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
 
     taskInput.value = "";
@@ -47,6 +52,10 @@ function renderTasks() {
             renderTasks();
         });
 
+        const timeSpan = document.createElement("span");
+        timeSpan.textContent = ` (${task.time})`;
+        timeSpan.classList.add("time");
+
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "❌";
         deleteBtn.classList.add("deleteBtn");
@@ -57,7 +66,8 @@ function renderTasks() {
         });
 
         li.appendChild(span);
+        li.appendChild(timeSpan); 
         li.appendChild(deleteBtn);
         taskList.appendChild(li);
-    });
+    });
 }

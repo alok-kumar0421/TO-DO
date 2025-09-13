@@ -83,3 +83,8 @@ button.deleteBtn {
 #front{
   color:#2d292d;
 }
+.time {
+    font-size: 0.8em;
+    color: grey;
+    margin-left: 10px;
+}
